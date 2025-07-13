@@ -19,6 +19,7 @@ import { Dock } from './components/magicui/dock';
 import { House, Image, Puzzle, StickyNote } from 'lucide-react';
 import { Separator } from './components/ui/separator';
 import { Tooltip, TooltipContent, TooltipTrigger } from './components/ui/tooltip';
+import { createNewNode } from './flow/nodeFactory';
 
 
 const initialNodes: Node<TurboNodeData>[] = [
@@ -102,13 +103,18 @@ const defaultEdgeOptions = {
 };
 
 const Flow = () => {
-  const [nodes, _, onNodesChange] = useNodesState(initialNodes);
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const onConnect: OnConnect = useCallback(
     (params) => setEdges((els) => addEdge(params, els)),
     [],
   );
+
+  const handleAddNode = () => {
+    const newNode = createNewNode();
+    setNodes((prevNodes) => [...prevNodes, newNode]);
+  };
 
   return (
     <div className='w-screen h-screen bg-black'>
@@ -128,7 +134,11 @@ const Flow = () => {
           <Dock className='flex flex-1 border h-auto border-zinc-500 text-zinc-500 gap-6 py-4 px-10'>
             <Tooltip>
               <TooltipTrigger asChild>
-                <Puzzle size={42} className='transition-transform hover:text-zinc-200 hover:-translate-y-2 hover:cursor-pointer' />
+                <Puzzle
+                  size={42}
+                  onClick={() => handleAddNode()}
+                  className='transition-transform hover:text-zinc-200 hover:-translate-y-2 hover:cursor-pointer'
+                />
               </TooltipTrigger>
               <TooltipContent>
                 <p>Add new node</p>

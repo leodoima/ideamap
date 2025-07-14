@@ -211,9 +211,9 @@ body {
     position: relative;
 }
 
-.react-flow__node-turbo .icon {
+/* .react-flow__node-turbo .icon {
     margin-right: 8px;
-}
+} */
 
 .react-flow__node-turbo .body {
     display: flex;
@@ -230,7 +230,7 @@ body {
     color: #777;
 }
 
-.react-flow__node-turbo .cloud {
+/* .react-flow__node-turbo .cloud {
     border-radius: 100%;
     width: 30px;
     height: 30px;
@@ -244,9 +244,9 @@ body {
     overflow: hidden;
     box-shadow: var(--node-box-shadow);
     z-index: 1;
-}
+} */
 
-.react-flow__node-turbo .cloud div {
+/* .react-flow__node-turbo .cloud div {
     background-color: var(--bg-color);
     flex-grow: 1;
     border-radius: 100%;
@@ -254,19 +254,19 @@ body {
     justify-content: center;
     align-items: center;
     position: relative;
-}
+} */
 
 .react-flow__handle {
     opacity: 0;
 }
 
-.react-flow__handle.source {
+/* .react-flow__handle.source {
     right: -10px;
-}
+} */
 
-.react-flow__handle.target {
-    /* left: -10px; */
-}
+/* .react-flow__handle.target {
+    left: -10px; 
+} */
 
 .react-flow__node:focus {
     outline: none;

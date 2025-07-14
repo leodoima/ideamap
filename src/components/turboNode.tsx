@@ -1,6 +1,7 @@
 import { memo, useEffect, useState, type ReactNode } from 'react';
 
-import { Handle, Position, useReactFlow, type Node, type NodeProps } from '@xyflow/react';
+import { Handle, NodeResizeControl, Position, useReactFlow, type Node, type NodeProps } from '@xyflow/react';
+import { Expand } from 'lucide-react';
 
 export type TurboNodeData = {
   title: string;
@@ -8,9 +9,18 @@ export type TurboNodeData = {
   subtitle?: string;
 };
 
-export default memo(({ id, data }: NodeProps<Node<TurboNodeData>>) => {
+const controlStyle = {
+  background: 'transparent',
+  border: 'none',
+};
+
+export default memo(({ id, selected, data }: NodeProps<Node<TurboNodeData>>) => {
   const [title, setTitle] = useState(data.title);
   const { setNodes } = useReactFlow<Node<TurboNodeData>>();
+
+  if (selected) {
+    console.log(data.title);
+  }
 
   useEffect(() => {
     setNodes((nodes) =>
@@ -32,7 +42,7 @@ export default memo(({ id, data }: NodeProps<Node<TurboNodeData>>) => {
     <>
       <div className="wrapper gradient">
         <div className="inner">
-          <div className="body">
+          <div className="body justify-center">
             <input
               className="title bg-transparent text-white outline-none text-center w-auto truncate"
               value={title}
@@ -45,7 +55,20 @@ export default memo(({ id, data }: NodeProps<Node<TurboNodeData>>) => {
             />
           </div>
           <Handle type="target" position={Position.Top} />
-          <Handle type="source" position={Position.Bottom} />
+
+          <Handle
+            type="source"
+            position={Position.Bottom}
+            className=' w-3 h-3'
+          />
+
+          {selected && (
+            <>
+              <NodeResizeControl style={controlStyle} minWidth={209} minHeight={50}>
+                <Expand className='text-white' />
+              </NodeResizeControl>
+            </>
+          )}
         </div>
       </div>
     </>
